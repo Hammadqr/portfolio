@@ -1,36 +1,188 @@
 // components/Footer.jsx
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
+import { Github, Linkedin, Twitter, Mail, Heart, ArrowUp } from 'lucide-react';
+import { personalInfo } from '../data/portfolioData.js';
+
 export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-gray-800 text-white py-8 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <h3 className="text-xl font-bold">Hammad Qaiser</h3>
-            <p className="text-gray-400">Frontend Developer</p>
-          </div>
+    <footer className="bg-gradient-to-t from-slate-900 to-slate-800 text-white py-12 px-4 relative overflow-hidden">
+      {/* Background geometric shapes */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
+        <motion.div
+          className="absolute top-10 left-10 w-24 h-24 bg-blue-400 rounded-full"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-20 w-20 h-20 bg-purple-400 rotate-45"
+          animate={{ 
+            rotate: [45, 135, 45],
+            y: [0, -20, 0]
+          }}
+          transition={{ 
+            duration: 15, 
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Left Column - Brand */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              {personalInfo.name}
+            </h3>
+            <p className="text-white/70 text-lg">
+              {personalInfo.title}
+            </p>
+            <p className="text-white/60 leading-relaxed">
+              Creating exceptional digital experiences with passion and precision. 
+              Let's build something amazing together!
+            </p>
+          </motion.div>
           
-          <div className="flex space-x-6">
-            <a href="#" className="text-gray-400 hover:text-white transition">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z" />
-              </svg>
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-              </svg>
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-              </svg>
-            </a>
-          </div>
+          {/* Center Column - Quick Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            <h4 className="text-xl font-semibold text-white mb-4">Quick Links</h4>
+            <div className="space-y-2">
+              {['Home', 'About', 'Projects', 'Contact'].map((link) => (
+                <motion.button
+                  key={link}
+                  onClick={() => {
+                    const element = document.getElementById(link.toLowerCase());
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="block text-white/70 hover:text-white transition-colors duration-300"
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  {link}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+          
+          {/* Right Column - Contact & Social */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            <h4 className="text-xl font-semibold text-white mb-4">Let's Connect</h4>
+            <div className="space-y-3">
+              <motion.a
+                href={`mailto:${personalInfo.email}`}
+                className="flex items-center gap-3 text-white/70 hover:text-white transition-colors duration-300"
+                whileHover={{ x: 5 }}
+              >
+                <Mail size={18} />
+                <span>{personalInfo.email}</span>
+              </motion.a>
+              <div className="flex items-center gap-3 text-white/70">
+                <span>📍 {personalInfo.location}</span>
+              </div>
+            </div>
+            
+            {/* Social Links */}
+            <div className="flex gap-4 mt-6">
+              <motion.a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 backdrop-blur-sm p-3 rounded-full hover:bg-white/20 transition-all duration-300"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Github size={20} />
+              </motion.a>
+              <motion.a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 backdrop-blur-sm p-3 rounded-full hover:bg-white/20 transition-all duration-300"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Linkedin size={20} />
+              </motion.a>
+              <motion.a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white/10 backdrop-blur-sm p-3 rounded-full hover:bg-white/20 transition-all duration-300"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Twitter size={20} />
+              </motion.a>
+            </div>
+          </motion.div>
         </div>
         
-        <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Hammad Qaiser. All rights reserved.</p>
-        </div>
+        {/* Bottom Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-12 pt-8 border-t border-white/10"
+        >
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2 text-white/60">
+              <span>&copy; {currentYear} {personalInfo.name}.</span>
+              <span>Made with</span>
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              >
+                <Heart className="text-red-400" size={16} fill="currentColor" />
+              </motion.div>
+              <span>& React</span>
+            </div>
+            
+            {/* Back to Top Button */}
+            <motion.button
+              onClick={scrollToTop}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ArrowUp size={20} />
+            </motion.button>
+          </div>
+        </motion.div>
       </div>
     </footer>
   );
